@@ -4,6 +4,7 @@ import { playPop, playSparkle, setMuted, toggleBgm, getIsMuted, getIsBgmPlaying 
 
 const NAV_ITEMS = [
   { id: 'story', label: 'Story', icon: BookOpen },
+  { id: 'crack', label: 'Crack Zone', icon: Sparkles },
   { id: 'world', label: 'Our World', icon: Compass },
   { id: 'arcade', label: 'Games', icon: Gamepad2 },
   { id: 'rakhi', label: 'Rakhi', icon: Gift },

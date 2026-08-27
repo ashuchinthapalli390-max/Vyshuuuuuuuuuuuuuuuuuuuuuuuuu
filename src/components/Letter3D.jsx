@@ -114,9 +114,14 @@ export default function Letter3D() {
           }}>
             <p style={{ marginBottom: '16px' }}>Dear Vyshuu,</p>
 
+            <p style={{ marginBottom: '16px', fontStyle: 'italic', color: '#92400e' }}>
+              Okay… no more crack, no more hahaha battle for a minute.
+            </p>
+
             <p style={{ marginBottom: '16px' }}>
               We don't always say emotional things out loud. In fact, most days we spend our energy teasing each other, sending random reels, arguing over silly things, or leaving each other on "hmm".
             </p>
+
 
             <p style={{ marginBottom: '16px' }}>
               Maybe we don't have thousands of photos or an epic movie-like childhood story. But the truth is: none of that matters. What matters is our real, genuine bond—the random check-ins, the quiet trust, and knowing that no matter what happens, your brother always has your back.

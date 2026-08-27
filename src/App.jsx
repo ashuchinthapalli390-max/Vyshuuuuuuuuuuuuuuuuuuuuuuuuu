@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import CustomCursor from './components/CustomCursor';
 import TrollNotifications from './components/TrollNotifications';
 import NavbarGlass from './components/NavbarGlass';
+import LockGate from './components/LockGate';
 import CountdownHero from './components/CountdownHero';
 import Lobby3D from './components/Lobby3D';
 import HonestBondIntro from './components/HonestBondIntro';
 import VyshuuProfile from './components/VyshuuProfile';
+import CrackZone from './components/CrackZone';
 import VyshuuVsFood from './components/VyshuuVsFood';
 import PhotoStories3D from './components/PhotoStories3D';
 import ChatUniverse3D from './components/ChatUniverse3D';
@@ -47,18 +49,15 @@ export default function App() {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: 'var(--bg-dark)' }}>
-      {/* Desktop Custom Pointer Cursor */}
+      {/* Desktop Living Mascot Teddy Cursor */}
       <CustomCursor cursorMode={cursorMode} />
 
       {/* Floating System Troll Toast Notifications */}
       {hasEntered && <TrollNotifications />}
 
-      {/* Real-time Countdown Gate to 28 August 12:00 AM IST */}
+      {/* Entry Gate: Password (16120311) -> 28 Aug Check -> Email -> Confirmation Mail -> Unlock */}
       {!hasEntered && (
-        <CountdownHero 
-          onUnlockComplete={() => setHasEntered(true)} 
-          isLockedByDefault={true}
-        />
+        <LockGate onUnlock={() => setHasEntered(true)} />
       )}
 
       {/* Navigation: Top glass pill on desktop, Bottom nav bar on mobile */}
@@ -77,10 +76,15 @@ export default function App() {
             <Lobby3D onSelectPortal={scrollToSection} />
           </div>
 
-          {/* Section: Story - Honest Cinematic Intro & Vyshuu Facts */}
+          {/* Section: Story - Honest Cinematic Intro & Vyshuu Facts + Achievements */}
           <div id="story">
             <HonestBondIntro />
             <VyshuuProfile />
+          </div>
+
+          {/* Section: The Crack Zone - Authentic WhatsApp Laugh Lore & HAHAHAHA Battle */}
+          <div id="crack">
+            <CrackZone />
           </div>
 
           {/* Section: Our World - 3D Chat Universe & Authentic Photos */}
@@ -99,6 +103,7 @@ export default function App() {
             <VyshuuVsFood />
             <InternetSiblingCourt />
           </div>
+
 
           {/* Section: Arcade - Online Chaos Arcade */}
           <div id="arcade">

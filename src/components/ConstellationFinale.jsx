@@ -174,11 +174,21 @@ export default function ConstellationFinale() {
 
       {/* Finale Foreground */}
       <div style={{ position: 'relative', zIndex: 10, maxWidth: '760px', width: '100%' }}>
-        {/* Photo 3: Mirror Selfie Reveal */}
+        {/* Journey Reflections */}
+        <div style={{ marginBottom: '24px', color: 'var(--cream-dim)', fontSize: '1.05rem', lineHeight: '1.8' }}>
+          <div>From random hahahahahas…</div>
+          <div>to calling each other crack…</div>
+          <div>to this unnecessarily large Rakhi website…</div>
+          <div style={{ color: 'var(--gold)', fontWeight: 800, marginTop: '8px', fontSize: '1.15rem' }}>
+            I’m glad this little bond exists. ❤️
+          </div>
+        </div>
+
+        {/* Photo 3: Authentic Photo Reveal */}
         <div style={{
-          width: '170px',
-          height: '230px',
-          margin: '0 auto 24px auto',
+          width: '180px',
+          height: '240px',
+          margin: '0 auto 16px auto',
           borderRadius: '24px',
           overflow: 'hidden',
           border: '3px solid var(--gold)',
@@ -193,6 +203,23 @@ export default function ConstellationFinale() {
           />
         </div>
 
+        {/* Finished Custom Royal Ruby Rakhi */}
+        <div style={{ marginBottom: '20px' }}>
+          <img
+            src="/festive_assets/royal_ruby_rakhi.png"
+            alt="Custom Rakhi"
+            style={{
+              width: '140px',
+              height: '140px',
+              objectFit: 'contain',
+              margin: '0 auto',
+              display: 'block',
+              filter: 'drop-shadow(0 0 25px var(--gold))',
+              animation: 'floatGentle 3s ease-in-out infinite'
+            }}
+          />
+        </div>
+
         <h1 className="font-serif text-gold-gradient" style={{
           fontSize: 'clamp(1.9rem, 5vw, 3.8rem)',
           fontWeight: 900,
@@ -203,35 +230,25 @@ export default function ConstellationFinale() {
           Happy Raksha Bandhan, Vyshuuuuuuuuuuuuu ❤️
         </h1>
 
-        <p style={{
-          color: 'var(--cream)',
-          fontFamily: 'var(--font-serif)',
-          fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-          lineHeight: '1.7',
-          maxWidth: '600px',
-          margin: '0 auto 16px auto'
-        }}>
-          “For the smiles, for the little chats, for this Rakhi, and for the sister who makes every moment brighter.”
-        </p>
-
         {/* Brother Ashu Definitive Signature */}
         <h2 className="font-serif text-rose-gradient" style={{
           fontSize: 'clamp(1.4rem, 3.8vw, 2.4rem)',
           fontWeight: 900,
           letterSpacing: '1px',
-          marginBottom: '6px'
+          marginBottom: '8px'
         }}>
           From your lovely brother Ashuuuuuuuuuuuuuuuuuuuu ❤️
         </h2>
 
         <p style={{
           color: 'var(--gold-champagne)',
-          fontSize: '0.88rem',
-          fontStyle: 'italic',
-          marginBottom: '32px'
+          fontSize: '0.92rem',
+          fontWeight: 700,
+          marginBottom: '28px'
         }}>
-          Made with love, glitter, and unnecessary extra effort 😭✨
+          Double crack forever 😂 • Made with love, glitter, and unnecessary extra effort 😭✨
         </p>
+
 
         {clickedFinal ? (
           <div 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Award, Zap, Heart, Shield, MessageSquare, Sparkles, Flame } from 'lucide-react';
 import { playPop, playBonk, playLaser, playSparkle } from '../utils/audio';
+import VyshuuAchievements from './VyshuuAchievements';
+
 
 const SOUNDBOARD_ITEMS = [
   { id: 'chaalu', phrase: '“Chaalu!”', context: 'When brother talks for more than 4 seconds straight.', sound: playBonk },
@@ -293,6 +295,10 @@ export default function VyshuuProfile() {
           </div>
         )}
       </div>
+
+      {/* Sibling Accolades & Badges */}
+      <VyshuuAchievements />
     </section>
   );
 }
+

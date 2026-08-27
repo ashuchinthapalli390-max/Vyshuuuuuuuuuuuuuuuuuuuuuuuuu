@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
     "canvas-confetti": "^1.9.4",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^6.24.0",
     "three": "^0.174.0"
   },
   "devDependencies": {

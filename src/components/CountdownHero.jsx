@@ -14,7 +14,33 @@ export default function CountdownHero({ onUnlockComplete, isLockedByDefault = tr
   const [giftTease, setGiftTease] = useState(null);
   const [heartsCount, setHeartsCount] = useState(0);
   const [secretUnlocked, setSecretUnlocked] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [gatePassed, setGatePassed] = useState(false);
+  const [visitorName, setVisitorName] = useState('');
+  const [visitorEmail, setVisitorEmail] = useState('');
+  const [gateStatus, setGateStatus] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  const handleVerifyGate = (e) => {
+    if (e) e.preventDefault();
+    const cleanName = visitorName.trim().toLowerCase();
+    setIsVerifying(true);
+
+    setTimeout(() => {
+      setIsVerifying(false);
+      if (cleanName.includes('vyshu') || cleanName === 'vyshuu' || cleanName === 'vyshu') {
+        playSparkle();
+        setGateStatus("Yayyy Vyshuuuu! You're on the list 🧸❤️");
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        setTimeout(() => {
+          setGatePassed(true);
+        }, 1200);
+      } else {
+        playBonk();
+        setGateStatus("Hmm… this surprise isn't for you 👀");
+      }
+    }, 400);
+  };
+
 
   const mountRef = useRef(null);
   const giftGroupRef = useRef(null);
@@ -251,6 +277,7 @@ export default function CountdownHero({ onUnlockComplete, isLockedByDefault = tr
       ))}
 
       {/* Main Countdown Container */}
+      {/* Main Container */}
       <div style={{
         position: 'relative',
         zIndex: 10,
@@ -259,48 +286,150 @@ export default function CountdownHero({ onUnlockComplete, isLockedByDefault = tr
         textAlign: 'center',
         margin: 'auto 0'
       }}>
-        {/* Cute Mascot Badge */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '10px',
-          background: 'rgba(255,255,255,0.08)',
-          backdropFilter: 'blur(10px)',
-          border: '1.5px solid var(--gold-border)',
-          padding: '6px 18px',
-          borderRadius: '9999px',
-          marginBottom: '14px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.6)'
-        }}>
-          <img
-            src="/festive_assets/mascot_teddy_rakhi.png"
-            alt="Mascot Teddy"
-            style={{ width: '32px', height: '32px', objectFit: 'contain' }}
-          />
-          <span style={{ fontSize: '0.82rem', color: 'var(--gold-champagne)', fontWeight: 700 }}>
-            Raksha Bandhan • 28 Aug 2026
-          </span>
-        </div>
+        {!gatePassed ? (
+          /* Step 1: “FOR VYSHUU ONLY” Gate */
+          <div className="glass-panel" style={{
+            padding: 'clamp(28px, 6vw, 44px) 24px',
+            maxWidth: '480px',
+            margin: '0 auto',
+            border: '2px solid var(--gold-border-bright)',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.8), 0 0 50px var(--gold-glow)'
+          }}>
+            <img
+              src="/festive_assets/mascot_teddy_rakhi.png"
+              alt="Mascot Teddy"
+              style={{
+                width: '90px',
+                height: '90px',
+                objectFit: 'contain',
+                margin: '0 auto 12px auto',
+                display: 'block',
+                filter: 'drop-shadow(0 8px 18px rgba(0,0,0,0.5))',
+                animation: 'floatGentle 3s ease-in-out infinite'
+              }}
+            />
+            <span className="badge-gold" style={{ marginBottom: '10px', display: 'inline-block' }}>
+              🧸 PRIVATE RAKHI SURPRISE
+            </span>
+            <h2 className="font-serif text-gold-gradient" style={{
+              fontSize: 'clamp(1.6rem, 4vw, 2.3rem)',
+              fontWeight: 800,
+              marginBottom: '6px'
+            }}>
+              FOR VYSHUU ONLY ❤️
+            </h2>
+            <p style={{ color: 'var(--cream)', fontSize: '0.92rem', marginBottom: '22px' }}>
+              Something special is waiting for you… Please verify yourself to enter!
+            </p>
 
+            <form onSubmit={handleVerifyGate} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <input
+                type="text"
+                value={visitorName}
+                onChange={(e) => setVisitorName(e.target.value)}
+                placeholder="Enter your name (e.g. Vyshuu)"
+                style={{
+                  padding: '13px 18px',
+                  borderRadius: '12px',
+                  border: '1.5px solid var(--gold-border)',
+                  background: 'rgba(20, 5, 12, 0.85)',
+                  color: '#fff',
+                  fontSize: '0.95rem',
+                  outline: 'none',
+                  textAlign: 'center'
+                }}
+              />
+              <button
+                type="submit"
+                className="btn-gold"
+                disabled={isVerifying || !visitorName.trim()}
+                style={{
+                  padding: '14px',
+                  fontSize: '0.95rem',
+                  cursor: isVerifying ? 'wait' : 'pointer',
+                  justifyContent: 'center',
+                  minHeight: '48px',
+                  boxShadow: '0 0 25px var(--gold-glow)'
+                }}
+              >
+                <Sparkles size={18} />
+                {isVerifying ? 'Checking with Teddy… 🧸' : 'Verify & Open Gate ✨'}
+              </button>
+            </form>
 
-        <h1 className="font-serif text-gold-gradient" style={{
-          fontSize: 'clamp(1.8rem, 5.5vw, 3.8rem)',
-          fontWeight: 900,
-          letterSpacing: '1px',
-          lineHeight: '1.2',
-          marginBottom: '6px'
-        }}>
-          For Vyshuuuuuuuuuuuuu ❤️
-        </h1>
+            {gateStatus && (
+              <div style={{
+                marginTop: '14px',
+                fontSize: '0.88rem',
+                color: gateStatus.includes('Yayyy') ? '#4ade80' : '#fb7185',
+                fontWeight: 700,
+                animation: 'fadeInScale 0.3s ease forwards'
+              }}>
+                {gateStatus}
+              </div>
+            )}
 
-        <p style={{
-          color: 'var(--cream-dim)',
-          fontFamily: 'var(--font-serif)',
-          fontSize: 'clamp(0.95rem, 2.2vw, 1.25rem)',
-          marginBottom: '24px'
-        }}>
-          Your Rakhi surprise opens in…
-        </p>
+            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+              <button
+                onClick={() => setGatePassed(true)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  fontSize: '0.78rem',
+                  cursor: 'pointer',
+                  textDecoration: 'underline'
+                }}
+              >
+                Brother Ashu Direct Access →
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* Step 2: Live Countdown to 28 August 12:00 AM IST */
+          <>
+            {/* Cute Mascot Badge */}
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              background: 'rgba(255,255,255,0.08)',
+              backdropFilter: 'blur(10px)',
+              border: '1.5px solid var(--gold-border)',
+              padding: '6px 18px',
+              borderRadius: '9999px',
+              marginBottom: '14px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.6)'
+            }}>
+              <img
+                src="/festive_assets/mascot_teddy_rakhi.png"
+                alt="Mascot Teddy"
+                style={{ width: '32px', height: '32px', objectFit: 'contain' }}
+              />
+              <span style={{ fontSize: '0.82rem', color: 'var(--gold-champagne)', fontWeight: 700 }}>
+                Raksha Bandhan • 28 Aug 2026
+              </span>
+            </div>
+
+            <h1 className="font-serif text-gold-gradient" style={{
+              fontSize: 'clamp(1.8rem, 5.5vw, 3.8rem)',
+              fontWeight: 900,
+              letterSpacing: '1px',
+              lineHeight: '1.2',
+              marginBottom: '6px'
+            }}>
+              For Vyshuuuuuuuuuuuuu ❤️
+            </h1>
+
+            <p style={{
+              color: 'var(--cream-dim)',
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(0.95rem, 2.2vw, 1.25rem)',
+              marginBottom: '24px'
+            }}>
+              Your Rakhi surprise opens in…
+            </p>
+
 
         {/* Live Timer Grid (Responsive: 4 cols on desktop, 2x2 on narrow mobile) */}
         <div style={{
@@ -424,7 +553,10 @@ export default function CountdownHero({ onUnlockComplete, isLockedByDefault = tr
             <ArrowRight size={18} />
           </button>
         </div>
+        </>
+        )}
       </div>
+
 
       {/* Transition Screen Overlay */}
       {isTransitioning && (
